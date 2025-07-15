@@ -1,4 +1,4 @@
-📦 Dart eCommerce CLI Application
+📦 Dart eCommerce Application
 
 A simple command-line based eCommerce product management system developed using Dart.  
 This application allows users to manage products by adding, viewing, editing, and deleting them directly through the terminal.
