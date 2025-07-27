@@ -14,7 +14,7 @@ class AppBarContent extends StatelessWidget {
           width: 50,
           height: 50,
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 201, 194, 194),
+            color:Color(0xFFCCCCCC),
             borderRadius: BorderRadius.circular(12),
           ),
         ),

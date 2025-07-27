@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/pages/add_update_page.dart';
-import 'package:internship/pages/details_page.dart';
+// import 'package:internship/pages/details_page.dart';
 import 'package:internship/pages/home_page.dart';
 import 'package:internship/pages/search_page.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         '/home' : (BuildContext context) => const HomePage(),
         '/add' : (BuildContext context) => const AddPage(),
         '/search' : (BuildContext context) => const SearchPage(),
-        '/details' : (BuildContext context) => const DetailsPage(),
+        // '/details' : (BuildContext context) => const DetailsPage(),
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internship/model/product.dart';
+import 'package:internship/pages/details_page.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -11,7 +12,12 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/details');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsPage(product: product),
+          ),
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),

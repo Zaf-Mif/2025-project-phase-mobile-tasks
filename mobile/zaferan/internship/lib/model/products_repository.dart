@@ -7,6 +7,8 @@ final List<Product> products = [
     gender: 'Men\'s',
     price: 100,
     rating: 4.0,
+    description: 'A slip-on leather shoe is a classic and convenient footwear option known for its laceless design, allowing easy wear and removal. This streamlined silhouette offers a relaxed yet refined appearance, ideal for those seeking both comfort and style. Typically crafted from high-quality leather, slip-ons provide durability and sophistication, making them versatile enough for both casual outings and smart-casual settings. With their timeless look and effortless fit, slip-on leather shoes are a dependable addition to any well-rounded wardrobe.',
+    sizes: [40, 41, 42, 43, 44, 45, 46, 47, 48],
   ),
   Product(
     name: 'Ballet Flats',
@@ -14,6 +16,8 @@ final List<Product> products = [
     gender: 'Women\'s',
     price: 80,
     rating: 4.3,
+    description:'A ballet flat is a timeless and elegant footwear choice, defined by its simple, low-cut design and close-to-foot fit. Inspired by traditional dance shoes, ballet flats offer a graceful and minimalist look, making them a popular choice for both casual and semi-formal occasions. Often made from supple leather or soft fabrics, they combine comfort with subtle sophistication. With their versatility and classic appeal, ballet flats are a staple in any modern wardrobe.',
+    sizes: [35, 36, 37, 38, 39, 40, 41, 42],
   ),
   Product(
     name: 'Hiking Boots',
@@ -21,6 +25,8 @@ final List<Product> products = [
     gender: 'Men\'s',
     price: 150,
     rating: 4.8,
+    description: 'Hiking shoes are rugged and supportive footwear designed specifically for outdoor adventures and rough terrain. Characterized by their durable construction, reinforced soles, and strong grip, hiking shoes provide stability and protection for long treks. Often made with water-resistant materials and breathable linings, they ensure comfort in various weather conditions. Combining function with all-day wearability, hiking shoes are an essential part of any outdoor enthusiast’s gear.',
+    sizes: [39, 40, 41, 42, 43, 44, 45, 46, 47],
   ),
   Product(
     name: 'Men\'s Slip-On Shoes',
@@ -28,6 +34,8 @@ final List<Product> products = [
     gender: 'Men\'s',
     price: 100,
     rating: 4.0,
+    description: 'A slip-on leather shoe is a classic and convenient footwear option known for its laceless design, allowing easy wear and removal. This streamlined silhouette offers a relaxed yet refined appearance, ideal for those seeking both comfort and style. Typically crafted from high-quality leather, slip-ons provide durability and sophistication, making them versatile enough for both casual outings and smart-casual settings. With their timeless look and effortless fit, slip-on leather shoes are a dependable addition to any well-rounded wardrobe.',
+    sizes: [40, 41, 42, 43, 44, 45, 46, 47, 48],
   ),
   Product(
     name: 'Ballet Flats',
@@ -35,6 +43,8 @@ final List<Product> products = [
     gender: 'Women\'s',
     price: 80,
     rating: 4.3,
+    description:'A ballet flat is a timeless and elegant footwear choice, defined by its simple, low-cut design and close-to-foot fit. Inspired by traditional dance shoes, ballet flats offer a graceful and minimalist look, making them a popular choice for both casual and semi-formal occasions. Often made from supple leather or soft fabrics, they combine comfort with subtle sophistication. With their versatility and classic appeal, ballet flats are a staple in any modern wardrobe.',
+    sizes: [35, 36, 37, 38, 39, 40, 41, 42],
   ),
   Product(
     name: 'Hiking Boots',
@@ -42,6 +52,8 @@ final List<Product> products = [
     gender: 'Men\'s',
     price: 150,
     rating: 4.8,
+    description: 'Hiking shoes are rugged and supportive footwear designed specifically for outdoor adventures and rough terrain. Characterized by their durable construction, reinforced soles, and strong grip, hiking shoes provide stability and protection for long treks. Often made with water-resistant materials and breathable linings, they ensure comfort in various weather conditions. Combining function with all-day wearability, hiking shoes are an essential part of any outdoor enthusiast’s gear.',
+    sizes: [41, 42, 43, 44, 45, 42, 43, 44, 45],
   ),
   Product(
     name: 'Men\'s Slip-On Shoes',
@@ -49,6 +61,8 @@ final List<Product> products = [
     gender: 'Men\'s',
     price: 100,
     rating: 4.0,
+    description: 'A slip-on leather shoe is a classic and convenient footwear option known for its laceless design, allowing easy wear and removal. This streamlined silhouette offers a relaxed yet refined appearance, ideal for those seeking both comfort and style. Typically crafted from high-quality leather, slip-ons provide durability and sophistication, making them versatile enough for both casual outings and smart-casual settings. With their timeless look and effortless fit, slip-on leather shoes are a dependable addition to any well-rounded wardrobe.',
+    sizes: [39, 40, 41, 42, 43, 44, 45, 46, 47],
   ),
   Product(
     name: 'Ballet Flats',
@@ -56,6 +70,8 @@ final List<Product> products = [
     gender: 'Women\'s',
     price: 80,
     rating: 4.3,
+    description:'A ballet flat is a timeless and elegant footwear choice, defined by its simple, low-cut design and close-to-foot fit. Inspired by traditional dance shoes, ballet flats offer a graceful and minimalist look, making them a popular choice for both casual and semi-formal occasions. Often made from supple leather or soft fabrics, they combine comfort with subtle sophistication. With their versatility and classic appeal, ballet flats are a staple in any modern wardrobe.',
+    sizes: [35, 36, 37, 38, 39, 40, 41, 42],
   ),
   Product(
     name: 'Hiking Boots',
@@ -63,5 +79,7 @@ final List<Product> products = [
     gender: 'Men\'s',
     price: 150,
     rating: 4.8,
+    description: 'Hiking shoes are rugged and supportive footwear designed specifically for outdoor adventures and rough terrain. Characterized by their durable construction, reinforced soles, and strong grip, hiking shoes provide stability and protection for long treks. Often made with water-resistant materials and breathable linings, they ensure comfort in various weather conditions. Combining function with all-day wearability, hiking shoes are an essential part of any outdoor enthusiast’s gear.',
+    sizes: [41, 42, 43, 44, 45, 42, 43, 44, 45],
   ),
 ];
