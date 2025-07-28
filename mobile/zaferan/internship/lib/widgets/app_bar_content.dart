@@ -43,7 +43,7 @@ class AppBarContent extends StatelessWidget {
                 ),
                 SizedBox(width: 5.0),
                 Text(
-                  'Zaferan',
+                  'Yohannes',
                   style: GoogleFonts.sora(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,

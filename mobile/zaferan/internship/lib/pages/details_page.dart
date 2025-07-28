@@ -17,50 +17,57 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     final product = widget.product;
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 56,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: Container(
-              alignment: Alignment.center,
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Icon(
-                Icons.arrow_back_ios_sharp,
-                color: Colors.indigoAccent,
-                size: 20,
-              ),
-            ),
-          ),
-        ),
-      ),
-
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                product.image,
-                height: 200,
-                fit: BoxFit.contain,
-              ),
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  child: Image.asset(
+                    product.image,
+                    width: double.infinity,
+                    height: 260,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  top: 20,
+                  left: 16,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 36,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_sharp,
+                        color: Colors.indigoAccent,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                )
+              ]
             ),
             const SizedBox(height: 16),
 
