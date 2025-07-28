@@ -8,7 +8,7 @@ A beautifully designed **Flutter UI project** for an e-commerce app, created as 
 
 | Home Screen | Details Screen |
 |-------------|----------------|
-| ![Home](images/home.png) | ![Details](images/details.png) |
+| ![Home](images/home1.png) | ![Details](images/details.png) |
 
 | Add Product | Search Page |
 |-------------|--------------|
