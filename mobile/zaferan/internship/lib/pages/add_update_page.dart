@@ -199,22 +199,27 @@ class _AddPageState extends State<AddPage> {
 
               // ADD Button
               Center(
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.indigoAccent,
-                    // color: Colors.black,
-                    borderRadius: BorderRadius.circular(12)
-                  ),
-                  // padding: EdgeInsets.symmetric(horizontal: 25),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'ADD',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                child: GestureDetector(
+                  onTap : (){
+                    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.indigoAccent,
+                      // color: Colors.black,
+                      borderRadius: BorderRadius.circular(12)
+                    ),
+                    // padding: EdgeInsets.symmetric(horizontal: 25),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ADD',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
