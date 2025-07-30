@@ -1,6 +1,8 @@
+// main.dart
 import 'package:flutter/material.dart';
+import 'package:internship/model/product.dart';
 import 'package:internship/pages/add_update_page.dart';
-// import 'package:internship/pages/details_page.dart';
+import 'package:internship/pages/details_page.dart';
 import 'package:internship/pages/home_page.dart';
 import 'package:internship/pages/search_page.dart';
 
@@ -18,12 +20,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
-      initialRoute: '/home', // initial page
+      initialRoute: '/home',
       routes: {
-        '/home' : (BuildContext context) => const HomePage(),
-        '/add' : (BuildContext context) => const AddPage(),
-        '/search' : (BuildContext context) => const SearchPage(),
-        // '/details' : (BuildContext context) => const DetailsPage(),
+        '/home': (context) => const HomePage(),
+        // '/add': (context) => const AddUpdatePage(),
+        '/search': (context) => const SearchPage(),
+        '/details': (context) {
+          final product = ModalRoute.of(context)!.settings.arguments as Product;
+          return DetailsPage(product: product);
+        },
+        '/update': (context) {
+          final product = ModalRoute.of(context)!.settings.arguments as Product;
+          return AddUpdatePage(product: product);
+        },
       },
     );
   }

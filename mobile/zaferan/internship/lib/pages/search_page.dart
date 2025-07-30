@@ -178,7 +178,7 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                       thumbShape: RoundSliderThumbShape(
                         enabledThumbRadius: 0.0,
-                      ), 
+                      ),
                       overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
                       showValueIndicator: ShowValueIndicator.always,
                     ),
@@ -204,7 +204,7 @@ class _SearchPageState extends State<SearchPage> {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        debugPrint('This is the apply button');
+                        Navigator.pop(context, '/home');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,

@@ -12,11 +12,10 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (context) => DetailsPage(product: product),
-          ),
+          '/details',
+          arguments: product,
         );
       },
       child: Container(
@@ -84,7 +83,7 @@ class ProductCard extends StatelessWidget {
                         MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${product.gender} shoe',
+                        product.category,
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey[600],

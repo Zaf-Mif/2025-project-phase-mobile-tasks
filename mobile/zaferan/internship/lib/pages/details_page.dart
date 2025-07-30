@@ -12,10 +12,16 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   int selectedSize = -1;
+  late Product product;
+
+  @override
+  void initState() {
+    super.initState();
+    product = widget.product; // initialize local copy
+  }
 
   @override
   Widget build(BuildContext context) {
-    final product = widget.product;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -42,7 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   left: 16,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(product);
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -66,8 +72,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                   ),
-                )
-              ]
+                ),
+              ],
             ),
             const SizedBox(height: 16),
 
@@ -75,7 +81,7 @@ class _DetailsPageState extends State<DetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${product.gender} shoe',
+                  product.category,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
@@ -104,7 +110,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   style: GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
-                  )
+                  ),
                 ),
                 // const SizedBox(height: 8),
                 const Spacer(),
@@ -121,11 +127,11 @@ class _DetailsPageState extends State<DetailsPage> {
             const SizedBox(height: 16),
             // Size selector
             Text(
-              "Size:", 
+              "Size:",
               style: GoogleFonts.poppins(
                 fontSize: 20,
-                fontWeight: FontWeight.w400
-              )
+                fontWeight: FontWeight.w400,
+              ),
             ),
             const SizedBox(height: 8),
             SingleChildScrollView(
@@ -151,7 +157,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         style: GoogleFonts.poppins(
                           color: isSelected ? Colors.white : Colors.black,
                           fontSize: 20,
-                          fontWeight: FontWeight.w500
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -166,8 +172,8 @@ class _DetailsPageState extends State<DetailsPage> {
               product.description,
               style: GoogleFonts.poppins(
                 fontSize: 14,
-                fontWeight: FontWeight.w500
-              )
+                fontWeight: FontWeight.w500,
+              ),
             ),
 
             const SizedBox(height: 30),
@@ -193,15 +199,27 @@ class _DetailsPageState extends State<DetailsPage> {
                   "DELETE",
                   style: GoogleFonts.poppins(
                     fontSize: 14,
-                    fontWeight: FontWeight.w600
-                  )
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
             const SizedBox(width: 50),
             Expanded(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  final updateProduct = await Navigator.pushNamed(
+                    context,
+                    '/update',
+                    arguments: widget.product,
+                  );
+                  if (updateProduct != null && updateProduct is Product) {
+                    setState(() {
+                      product = updateProduct;
+                    });
+                    Navigator.pop(context, updateProduct);
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.indigoAccent,

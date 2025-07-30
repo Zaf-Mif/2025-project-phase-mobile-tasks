@@ -1,14 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internship/model/product.dart';
 
-class AddPage extends StatefulWidget {
-  const AddPage({super.key});
+class AddUpdatePage extends StatefulWidget {
+  final Product product;
+  // final int? index;
+  
+  const AddUpdatePage({super.key, required  this.product});
 
   @override
-  State<AddPage> createState() => _AddPageState();
+  State<AddUpdatePage> createState() => _AddUpdatePageState();
 }
 
-class _AddPageState extends State<AddPage> {
+class _AddUpdatePageState extends State<AddUpdatePage> {
+  late TextEditingController nameController;
+  late TextEditingController descriptionController;
+  late TextEditingController categoryController;
+  late TextEditingController priceController;
+
+  bool get isUpdateMode => widget.product != null;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.product?.name ?? '');
+    categoryController = TextEditingController(text: widget.product?.category ?? '');
+    priceController = TextEditingController(
+      text: widget.product != null ? widget.product!.price.toString() : '',
+    );
+    descriptionController = TextEditingController(text: widget.product?.description ?? '');
+    }
+
+   @override
+  void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    categoryController.dispose();
+    priceController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,6 +133,13 @@ class _AddPageState extends State<AddPage> {
                     // color: Colors.black,
                     borderRadius: BorderRadius.circular(12)
                   ),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  alignment: Alignment.centerLeft,
+                  child: TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(border: InputBorder.none),
+                    style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
 
@@ -127,6 +165,15 @@ class _AddPageState extends State<AddPage> {
                     color: Color(0xFFF3F3F3),
                     // color: Colors.black,
                     borderRadius: BorderRadius.circular(12)
+                  ),
+
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  alignment: Alignment.centerLeft,
+                  child: TextField(
+                    controller: categoryController,
+                    readOnly: widget.product != null,
+                    decoration: InputDecoration(border: InputBorder.none),
+                    style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
@@ -154,17 +201,38 @@ class _AddPageState extends State<AddPage> {
                     // color: Colors.black,
                     borderRadius: BorderRadius.circular(12)
                   ),
+                  
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: TextField(
+                            controller: priceController,
+                            readOnly: widget.product != null, // read-only when updating
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                            ),
+                            style: GoogleFonts.poppins(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
 
                   // to add the dollar sign
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    '\$',
-                    style: GoogleFonts.poppins(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                      Text(
+                        '\$',
+                        style: GoogleFonts.poppins(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ]
                   ),
                 ),
               ),
@@ -192,6 +260,17 @@ class _AddPageState extends State<AddPage> {
                     // color: Colors.black,
                     borderRadius: BorderRadius.circular(12)
                   ),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: TextField(
+                    controller: descriptionController,
+                    maxLines: null,
+                    expands: true,
+                    decoration: InputDecoration(border: InputBorder.none),
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ),
               
@@ -201,7 +280,17 @@ class _AddPageState extends State<AddPage> {
               Center(
                 child: GestureDetector(
                   onTap : (){
-                    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                    final newProduct = Product(
+                      name: nameController.text,
+                      description: descriptionController.text,
+                      price: double.tryParse(priceController.text) ?? 0,
+                      category: categoryController.text,
+                      image: widget.product?.image ?? 'lib/icons/default_image.png',
+                      rating: widget.product?.rating ?? 0, 
+                      sizes: widget.product?.sizes ?? [], // Keep sizes from existing product if updating, else empty list
+                    );
+
+                    Navigator.pop(context, newProduct); 
                   },
                   child: Container(
                     width: double.infinity,

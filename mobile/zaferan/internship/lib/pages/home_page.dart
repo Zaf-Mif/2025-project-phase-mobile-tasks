@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:internship/model/product.dart';
 import 'package:internship/model/products_repository.dart';
 import 'package:internship/widgets/app_bar_content.dart'; // App bar UI (logo, search, etc.)
-import 'package:internship/widgets/product_card.dart';  // Displays individual product details
-import 'package:internship/widgets/section_header.dart';// Section title for the product list
+import 'package:internship/widgets/product_card.dart'; // Displays individual product details
+import 'package:internship/widgets/section_header.dart'; // Section title for the product list
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,7 +41,26 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(bottom: 16),
                 itemBuilder: (context, index) {
                   final product = products[index];
-                  return ProductCard(product: product); // Product card UI
+                  return GestureDetector(
+                    onTap: () async {
+                      final updatedProduct = await Navigator.pushNamed(
+                        context,
+                        '/update',
+                        arguments: products[index],
+                      );
+                      if (updatedProduct != null && updatedProduct is Product) {
+                        setState(() {
+                          int i = products.indexWhere(
+                            (p) => p.name == updatedProduct.name,
+                          );
+                          if (i != -1) {
+                            products[i] = updatedProduct;
+                          }
+                        });
+                      }
+                    },
+                    child: ProductCard(product: product),
+                  ); // Product card UI
                 },
               ),
             ),
@@ -49,8 +69,13 @@ class _HomePageState extends State<HomePage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/add');
+        onPressed: () async {
+          final newProduct = await Navigator.pushNamed(context, '/add');
+          if (newProduct != null && newProduct is Product) {
+            setState(() {
+              products.add(newProduct);
+            });
+          }
         },
         backgroundColor: Colors.indigoAccent,
         shape: CircleBorder(),
