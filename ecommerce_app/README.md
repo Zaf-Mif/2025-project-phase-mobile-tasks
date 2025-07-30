@@ -12,29 +12,37 @@ Organized under `lib/` and `test/` using clean architectural boundaries:
 
 ```
 lib/
-├── core/                    # (Shared logic - error handling, utils) [Placeholder for future expansion]
+├── core/                                 # (Shared logic - error handling, utils) [Placeholder for future expansion]
+│   └── error/
+│       └── failures.dart                 # ✅ Base error handling classes (e.g., ServerFailure)
 ├── features/
 │   └── product/
 │       ├── data/
-│       │   └── models/
-│       │       └── product_model.dart        # ✅ JSON serialization logic
+│       │   └── product_model.dart          # ✅ JSON serialization logic
 │       ├── domain/
 │       │   ├── entities/
-│       │   │   └── product.dart              # ✅ Core business entity
-│       │   ├── repositories/
-│       │   │   └── product_repository.dart   # ✅ Abstract class for data source
+│       │   │   └── product.dart            # ✅ Core business entity
+│       │   └── repositories/
+│       │       └── product_repository.dart  # ✅ Abstract class for data source
 │       │   └── usecases/
-│       │       ├── create_product.dart       # ✅ Create product use case
-│       │       └── delete_product.dart       # ✅ Delete product use case
-└── test/
-    └── features/
-        └── product/
-            ├── data/
-            │   └── product_model_test.dart   # ✅ Unit test for JSON conversion
-            └── domain/
-                └── usecases/
-                    ├── create_product_test.dart  # ✅ Tested with mock repository
-                    └── delete_product_test.dart  # ✅ Tested with mock repository
+│       │       ├── create_product.dart        # ✅ Create product use case
+│       │       ├── delete_product.dart        # ✅ Delete product use case
+│       │       ├── update_product.dart
+│       │       ├── view_all_products.dart
+│       │       └── view_product.dart
+│       └── main.dart
+test/
+├── features/
+│   └── product/
+│       ├── data/
+│       │   └── product_model_test.dart          # ✅ Unit test for JSON conversion
+│       ├── domain/
+│       │   └── usecases/
+│       │       ├── create_product_test.dart       # ✅ Tested with mock repository
+│       │       ├── delete_product_test.dart        # ✅ Tested with mock repository
+│       │       ├── update_product_test.dart
+│       │       ├── view_all_products_test.dart
+│       │       └── view_product_test.dart
 ```
 
 ---
