@@ -12,7 +12,7 @@ void main() {
   late CreateProductUsecase usecase;
   late MockProductRepository mockProductRepository;
 
-  final newProduct = Product(
+  const newProduct = Product(
     id: 3,
     name: 'New Product',
     price: 15.0,

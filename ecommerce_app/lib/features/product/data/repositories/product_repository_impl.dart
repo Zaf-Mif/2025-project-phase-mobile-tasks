@@ -1,7 +1,9 @@
 // product_repository_impl.dart
 
 import 'package:dartz/dartz.dart';
+import '../../../../../test/features/product/data/repositories/product_repository_impl_test.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/platform/network_info.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../datasources/product_local_data_sources.dart';
@@ -10,19 +12,21 @@ import '../models/product_model.dart';
 
 /// Implementation of ProductRepository which handles
 /// data retrieval and persistence from both remote and local sources.
-/// 
+///
 /// Uses [ProductRemoteDataSource] for network operations and
 /// [ProductLocalDataSource] for local caching and fallback.
-/// 
+///
 /// Uses error handling with [Either] to return failures or data.
 
 class ProductRepositoryImpl implements ProductRepository {
-  final ProductRemoteDataSource remoteDataSource;
-  final ProductLocalDataSource localDataSource;
+  late final ProductRemoteDataSource remoteDataSource;
+  late final ProductLocalDataSource localDataSource;
+  late final NetworkInfo networkInfo;
 
   ProductRepositoryImpl({
     required this.remoteDataSource,
     required this.localDataSource,
+    required this.networkInfo ,
   });
 
   /// Attempts to fetch all products from the remote source.

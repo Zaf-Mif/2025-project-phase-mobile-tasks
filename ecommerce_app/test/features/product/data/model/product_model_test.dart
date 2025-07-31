@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:ecommerce_app/features/product/data/models/product_model.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   late ProductModel productModel;

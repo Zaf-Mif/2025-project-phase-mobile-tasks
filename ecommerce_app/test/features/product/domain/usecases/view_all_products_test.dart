@@ -18,7 +18,7 @@ void main() {
   });
 
   final products = [
-    Product(id: 1, name: 'Test Product', price: 9.99, description: 'Test product desciption', imageUrl: 'images.jpg'),
+    const Product(id: 1, name: 'Test Product', price: 9.99, description: 'Test product desciption', imageUrl: 'images.jpg'),
   ];
   test('Should return list of products from repositories', () async {
     when( () =>

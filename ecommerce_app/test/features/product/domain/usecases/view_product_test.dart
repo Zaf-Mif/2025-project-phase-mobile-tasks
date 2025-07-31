@@ -17,7 +17,7 @@ void main() {
     usecase = ViewProductUsecase(mockProductRepository);
   });
 
-  final product = Product(
+  const product = Product(
     id: 1,
     name: 'Test Product',
     price: 10.0,
@@ -26,11 +26,11 @@ void main() {
   );
   test('Should return product from repository by id', () async {
     when(() => mockProductRepository.getProductById(1))
-        .thenAnswer((_) async => Right(product));
+        .thenAnswer((_) async => const Right(product));
 
     final result = await usecase(1);
 
-    expect(result, Right(product));
+    expect(result, const Right(product));
     verify(() => mockProductRepository.getProductById(1));
     verifyNoMoreInteractions(mockProductRepository);
   });
