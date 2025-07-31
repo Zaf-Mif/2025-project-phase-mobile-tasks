@@ -17,7 +17,7 @@ void main() {
     usecase = UpdateProductUsecase(mockProductRepository);
   });
 
-  final updatedProduct = Product(
+  const updatedProduct = Product(
     id: 1,
     name: 'Updated Product',
     price: 20.0,

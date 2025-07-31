@@ -12,15 +12,15 @@ abstract class Failure extends Equatable {
 
 /// Represents a failure due to a server issue
 class ServerFailure extends Failure {
-  const ServerFailure([String? message]) : super(message);
+  const ServerFailure([super.message]);
 }
 
 /// Represents a failure due to network
 class NetworkFailure extends Failure {
-  const NetworkFailure([String? message]) : super(message);
+  const NetworkFailure([super.message]);
 }
 
 /// Represents a failure due to invalid cache or no local data
 class CacheFailure extends Failure {
-  const CacheFailure([String? message]) : super(message);
+  const CacheFailure([super.message]);
 }
