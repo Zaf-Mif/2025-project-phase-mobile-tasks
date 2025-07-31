@@ -10,7 +10,7 @@ void main() {
   late ProductModel productModel;
 
   setUp(() {
-    productModel = ProductModel(
+    productModel = const ProductModel(
       id: 1,
       name: 'Test Product',
       price: 49.99,
