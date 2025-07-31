@@ -10,6 +10,8 @@ abstract class Failure extends Equatable {
   List<Object?> get props => [message];
 }
 
+// General failures
+
 /// Represents a failure due to a server issue
 class ServerFailure extends Failure {
   const ServerFailure([super.message]);
