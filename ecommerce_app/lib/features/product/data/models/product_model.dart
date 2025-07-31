@@ -1,7 +1,7 @@
 import '../../domain/entities/product.dart';
 
 class ProductModel extends Product {
-  ProductModel({
+  const ProductModel({
     required super.id,
     required super.name,
     required super.price,
@@ -27,5 +27,24 @@ class ProductModel extends Product {
       'price': price,
       'description': description,
     };
+  }
+  factory ProductModel.fromEntity(Product product) {
+    return ProductModel(
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      description: product.description,
+    );
+  }
+
+  Product toEntity() {
+    return Product(
+      id: id,
+      name: name,
+      price: price,
+      imageUrl: imageUrl,
+      description: description,
+    );
   }
 }
