@@ -1,68 +1,54 @@
-📦 Dart eCommerce Application
+# Task 7: Implementing Navigation and Routing in an eCommerce Mobile App
 
-A simple command-line based eCommerce product management system developed using Dart.  
-This application allows users to manage products by adding, viewing, editing, and deleting them directly through the terminal.
+This task focuses on integrating navigation and routing features into a Flutter-based eCommerce mobile application. The goal is to enable smooth navigation between screens, proper data passing, and handling of navigation events using Flutter best practices.
 
----
+## Features Implemented
 
-📑 Features
+### 1. Screen Navigation
+- The application includes the following screens:
+  - Home Screen: Displays a list of all products.
+  - Add/Edit Product Screen: Used to create a new product or modify an existing one.
+  - Product Detail Screen: Displays full information of a selected product.
+- Navigation between screens is implemented using Flutter’s built-in `Navigator`.
 
-- Add new products  
-- View all products  
-- View a single product by its number  
-- Edit product details (name, description, price)  
-- Remove a product  
-- Input validation and error handling  
-- Interactive and clear menu navigation  
+### 2. Named Routes
+- Each screen is registered with a named route in a centralized routing configuration.
+- Navigation is handled using `Navigator.pushNamed` and `Navigator.pop`.
 
----
+### 3. Passing Data Between Screens
+- When adding or editing a product, the user can input a title and description.
+- Product data is passed between the Home screen and Add/Edit screens using route arguments or constructors, depending on the navigation direction.
 
-## 📂 Project Structure
+### 4. Navigation Animations
+- Smooth and default animations are used for transitions between screens.
+- The app supports clean navigation animations for a more polished user experience.
 
-```
+### 5. Handling Navigation Events
+- The back button behavior is managed properly using `Navigator.pop` to return to the Home screen from the Add/Edit Product screen.
+- Other navigation events are handled as needed for consistent app flow.
 
-2025-project-phase-mobile-tasks/
-└── on-boarding/
-└── product-2/
-├── main.dart               # Main program with the menu system
-├── Product.dart            # Product class with fields, getters, and setters
-├── ProductManager.dart     # Manages product operations (add, view, edit, delete)
-├── Ecommerce.dart          # Extends ProductManager, optionally overriding methods
-└── README.md               # Project description and instructions
+## How to Run the App
 
-```
+### Prerequisites
+- Flutter SDK installed (version 3.0 or higher recommended)
+- A working IDE such as Android Studio or Visual Studio Code
 
----
-🚀 How to Run
+### Steps
+1. Clone the repository.
+2. Run `flutter pub get` to fetch dependencies.
+3. Run the application using `flutter run`.
 
-1. Ensure Dart SDK is installed on your system.  
-   You can check by running:
-```
 
-dart --version
 
-```
+## Evaluation Criteria
 
-2. Open the terminal in the `product-2` directory.
+- Correct implementation of screen navigation, named routes, and data passing
+- Proper handling of back navigation and navigation events
+- Smooth navigation animations
+- Clean code and adherence to Flutter best practices
 
-3. Execute the application:
-```
+## Notes
 
-dart run main.dart
+This implementation adheres to Clean Architecture where possible and maintains separation of concerns for UI, domain, and data layers.
 
-```
-
-4. Follow the on-screen instructions provided in the menu.
-
----
-
-✍️ Author
-
-Zaferan Miftah - 2025 Mobile Project Phase
-
----
-
-## 📜 License
-
-This project is created for educational use and coursework demonstrations.
 ```
