@@ -51,4 +51,3 @@ This task focuses on integrating navigation and routing features into a Flutter-
 
 This implementation adheres to Clean Architecture where possible and maintains separation of concerns for UI, domain, and data layers.
 
-```
