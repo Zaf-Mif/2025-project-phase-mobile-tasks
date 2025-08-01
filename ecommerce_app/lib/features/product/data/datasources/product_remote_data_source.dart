@@ -1,5 +1,7 @@
 // product_remote_data_source.dart
 
+import 'package:http/http.dart' as http;
+
 import '../models/product_model.dart';
 
 /// Abstract contract for the remote data source.
@@ -34,4 +36,40 @@ abstract class ProductRemoteDataSource {
   ///
   /// Throws a [ServerException] if the product cannot be found or the deletion fails.
   Future<void> deleteProduct(int id);
+}
+
+class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
+  late final http.Client client;
+
+  ProductRemoteDataSourceImpl({required this.client});
+
+  @override
+  Future<void> createProduct(ProductModel product) {
+    // TODO: implement createProduct
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteProduct(int id) {
+    // TODO: implement deleteProduct
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ProductModel>> getAllProducts() {
+    // TODO: implement getAllProducts
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ProductModel?> getProductById(int id) {
+    // TODO: implement getProductById
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateProduct(ProductModel product) {
+    // TODO: implement updateProduct
+    throw UnimplementedError();
+  }
 }

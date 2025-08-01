@@ -1,120 +1,52 @@
-# 🧩 Task 14: Implement Local Data Source for Products
+# Task 15: Implement Remote Data Source
 
-## ✅ Objective
+## Overview
 
-Implement a local data source layer for caching and managing product data using `SharedPreferences`, adhering to **Clean Architecture** and **Test-Driven Development (TDD)** principles.
+In this task, you will implement the **remote data source** for the Ecommerce app. The remote data source is responsible for fetching products from the backend API when the user is online. It acts as the primary source of truth for product data and handles network requests, response parsing, and error handling.
 
----
+## Requirements
 
-## 📦 Features
+* Implement the `ProductRemoteDataSource` interface (contract).
+* Use the provided API to fetch product data.
+* Handle both successful responses and error states.
+* Parse JSON responses into product model objects.
+* Implement proper error handling by throwing exceptions on failure.
 
-* Cache product list locally
-* Retrieve cached products
-* Save new product to local storage
-* Update existing product
-* Delete product from cache
-* Proper error handling using `CacheException`
+## API Reference
 
----
+* **Base URL:** (Provide your actual base URL here, e.g., `https://api.yourdomain.com/products`)
+* Endpoints for:
 
-## 🛠️ Implementation Summary
+  * Getting product list
+  * Getting product details (if applicable)
 
-### 1. **Interface** – `ProductLocalDataSource`
+## Implementation Details
 
-Located in:
-`lib/features/product/data/datasources/product_local_data_sources.dart`
+* Create a concrete class `ProductRemoteDataSourceImpl` that uses an HTTP client (e.g., `http` package) to make API calls.
+* Implement methods to fetch data from the remote server.
+* Include headers such as `'Content-Type': 'application/json'`.
+* Return parsed `ProductModel` instances on success.
+* Throw `ServerException` on any response with a status code other than 200.
 
-Defines abstract methods for:
+## Testing
 
-* `getCachedProducts()`
-* `cacheProducts(List<ProductModel>)`
-* `saveProduct(ProductModel)`
-* `updateProduct(ProductModel)`
-* `deleteProduct(int id)`
+* Write unit tests for `ProductRemoteDataSourceImpl` using mocked HTTP clients.
+* Test cases should include:
 
-### 2. **Concrete Class** – `ProductLocalDataSourcesImpl`
+  * Verifying correct API endpoint URLs and headers are used.
+  * Returning valid `ProductModel` objects on HTTP 200 responses.
+  * Throwing `ServerException` on HTTP error responses (e.g., 404, 500).
+* Use fixtures (static JSON files) to mock API responses in tests.
 
-Implements all local operations using `SharedPreferences`.
+## How to Verify Completion
 
-### 3. **Model Used** – `ProductModel`
+* The remote data source class is fully implemented with all required methods.
+* Unit tests cover all success and failure scenarios.
+* Tests pass successfully.
+* Code is pushed to the repository branch for Task 15.
 
-Serializes and deserializes product data for caching.
+## References
 
----
-
-## 🧪 Tests
-
-Located in:
-`test/features/product/data/datasources/product_local_data_source_test.dart`
-
-### ✅ Test Scenarios Covered:
-
-* ✅ Should cache product list using `SharedPreferences`
-* ✅ Should throw `CacheException` when caching fails
-* ✅ Should return list of `ProductModel` when cached data exists
-* ✅ Should throw `CacheException` when no cached data is found
-* ✅ Should save product to cache
-* ✅ Should update existing product
-* ✅ Should throw `CacheException` when trying to update non-existent product
-* ✅ Should delete product from cache
-* ✅ Should throw `CacheException` if deleting a non-existent product
-
----
-
-## ⚙️ Dependencies
-
-Make sure the following are added in `pubspec.yaml`:
-
-```yaml
-dependencies:
-  shared_preferences: ^2.5.3
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  mocktail: ^1.0.1
-```
-
----
-
-## 📂 File Structure
-
-```
-lib/
-└── features/
-    └── product/
-        └── data/
-            └── datasources/
-                └── product_local_data_sources.dart
-                └── product_model.dart
-
-test/
-└── features/
-    └── product/
-        └── data/
-            └── datasources/
-                └── product_local_data_source_test.dart
-```
-
----
-
-## ⚠️ Error Handling
-
-All operations throw `CacheException` from:
-
-```
-lib/core/error/exceptions.dart
-```
-
-If:
-
-* Data is not available
-* Operation (cache/save/update/delete) fails
-
----
-
-## 📘 References
-
-* Follows [Clean Architecture](https://resocoder.com/2019/09/26/flutter-tdd-clean-architecture-course-8-local-data-source/)
-* Test-first approach using **TDD**
+* This implementation follows the TDD and Clean Architecture principles demonstrated in Reso Coder’s [Flutter TDD Clean Architecture Course](https://resocoder.com/2019/09/26/flutter-tdd-clean-architecture-course-8-local-data-source/).
+* HTTP package: [https://pub.dev/packages/http](https://pub.dev/packages/http)
 
