@@ -1,7 +1,7 @@
 // product_repository_impl.dart
 
 import 'package:dartz/dartz.dart';
-import '../../../../../test/features/product/data/repositories/product_repository_impl_test.dart';
+// import '../../../../../test/features/product/data/repositories/product_repository_impl_test.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/platform/network_info.dart';
 import '../../domain/entities/product.dart';
@@ -33,15 +33,26 @@ class ProductRepositoryImpl implements ProductRepository {
   /// If it fails, tries to get cached products from local storage.
   @override
   Future<Either<Failure, List<Product>>> getAllProducts() async {
-    try {
-      final remoteProducts = await remoteDataSource.getAllProducts();
-      localDataSource.cacheProducts(remoteProducts); // save copy locally
-      return Right(remoteProducts.map((e) => e.toEntity()).toList());
-    } catch (e) {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteProducts = await remoteDataSource.getAllProducts();
+        await localDataSource.cacheProducts(remoteProducts);
+        return Right(remoteProducts.map((e) => e.toEntity()).toList());
+      } catch (_) {
+        // If remote fails, fallback to cache
+        try {
+          final cachedProducts = await localDataSource.getCachedProducts();
+          return Right(cachedProducts.map((e) => e.toEntity()).toList());
+        } catch (_) {
+          return const Left(CacheFailure());
+        }
+      }
+    } else {
+      // Offline: use local data
       try {
         final cachedProducts = await localDataSource.getCachedProducts();
         return Right(cachedProducts.map((e) => e.toEntity()).toList());
-      } catch (cacheError) {
+      } catch (_) {
         return const Left(CacheFailure());
       }
     }
@@ -54,7 +65,7 @@ class ProductRepositoryImpl implements ProductRepository {
     try {
       final model = await remoteDataSource.getProductById(id);
       return Right(model?.toEntity());
-    } catch (e) {
+    } catch (_) {
       return const Left(ServerFailure());
     }
   }
@@ -67,7 +78,7 @@ class ProductRepositoryImpl implements ProductRepository {
       await remoteDataSource.createProduct(model);
       await localDataSource.saveProduct(model);
       return const Right(null);
-    } catch (e) {
+    } catch (_) {
       return const Left(ServerFailure());
     }
   }
@@ -80,7 +91,7 @@ class ProductRepositoryImpl implements ProductRepository {
       await remoteDataSource.updateProduct(model);
       await localDataSource.updateProduct(model);
       return const Right(null);
-    } catch (e) {
+    } catch (_) {
       return const Left(ServerFailure());
     }
   }
@@ -92,7 +103,7 @@ class ProductRepositoryImpl implements ProductRepository {
       await remoteDataSource.deleteProduct(id);
       await localDataSource.deleteProduct(id);
       return const Right(null);
-    } catch (e) {
+    } catch (_) {
       return const Left(ServerFailure());
     }
   }
