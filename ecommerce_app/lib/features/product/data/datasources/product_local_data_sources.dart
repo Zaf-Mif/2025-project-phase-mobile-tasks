@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/product_model.dart';
 
 /// Abstract contract for the local data source.
@@ -27,4 +29,39 @@ abstract class ProductLocalDataSource {
   ///
   /// Throws a [CacheException] if the product cannot be found or deletion fails.
   Future<void> deleteProduct(int id);
+}
+
+class ProductLocalDataSourcesImpl implements ProductLocalDataSource {
+  late final SharedPreferences sharedPreferences;
+
+  ProductLocalDataSourcesImpl({required this.sharedPreferences});
+  @override
+  Future<void> cacheProducts(List<ProductModel> products) {
+    // TODO: implement cacheProducts
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteProduct(int id) {
+    // TODO: implement deleteProduct
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ProductModel>> getCachedProducts() {
+    // TODO: implement getCachedProducts
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> saveProduct(ProductModel product) {
+    // TODO: implement saveProduct
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateProduct(ProductModel product) {
+    // TODO: implement updateProduct
+    throw UnimplementedError();
+  }
 }
