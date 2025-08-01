@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/error/exceptions.dart';
 import '../models/product_model.dart';
 
 /// Abstract contract for the local data source.
@@ -31,37 +34,59 @@ abstract class ProductLocalDataSource {
   Future<void> deleteProduct(int id);
 }
 
+const cachedProductsKey = 'CACHED_PRODUCTS';
+
 class ProductLocalDataSourcesImpl implements ProductLocalDataSource {
-  late final SharedPreferences sharedPreferences;
+  final SharedPreferences sharedPreferences;
 
   ProductLocalDataSourcesImpl({required this.sharedPreferences});
+
   @override
-  Future<void> cacheProducts(List<ProductModel> products) {
-    // TODO: implement cacheProducts
-    throw UnimplementedError();
+  Future<void> cacheProducts(List<ProductModel> products) async {
+    final jsonList = products.map((e) => e.toJson()).toList();
+    final jsonString = jsonEncode(jsonList);
+    final success = await sharedPreferences.setString(cachedProductsKey, jsonString);
+    if (!success) throw CacheException();
   }
 
   @override
-  Future<void> deleteProduct(int id) {
-    // TODO: implement deleteProduct
-    throw UnimplementedError();
+  Future<List<ProductModel>> getCachedProducts() async {
+    final jsonString = sharedPreferences.getString(cachedProductsKey);
+    if (jsonString != null) {
+      try {
+        final decoded = jsonDecode(jsonString) as List;
+        return decoded.map((e) => ProductModel.fromJson(e)).toList();
+      } catch (_) {
+        throw CacheException();
+      }
+    } else {
+      throw CacheException();
+    }
   }
 
   @override
-  Future<List<ProductModel>> getCachedProducts() {
-    // TODO: implement getCachedProducts
-    throw UnimplementedError();
+  Future<void> saveProduct(ProductModel product) async {
+    final current = await getCachedProducts();
+    final updated = [...current, product];
+    await cacheProducts(updated);
   }
 
   @override
-  Future<void> saveProduct(ProductModel product) {
-    // TODO: implement saveProduct
-    throw UnimplementedError();
+  Future<void> updateProduct(ProductModel product) async {
+    final current = await getCachedProducts();
+    final index = current.indexWhere((e) => e.id == product.id);
+    if (index == -1) throw CacheException();
+
+    current[index] = product;
+    await cacheProducts(current);
   }
 
   @override
-  Future<void> updateProduct(ProductModel product) {
-    // TODO: implement updateProduct
-    throw UnimplementedError();
+  Future<void> deleteProduct(int id) async {
+    final current = await getCachedProducts();
+    final updated = current.where((e) => e.id != id).toList();
+    if (current.length == updated.length) throw CacheException();
+
+    await cacheProducts(updated);
   }
 }

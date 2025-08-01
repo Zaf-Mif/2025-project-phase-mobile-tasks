@@ -1,38 +1,120 @@
-### Task 13: Implement Network Connectivity Detection
+# 🧩 Task 14: Implement Local Data Source for Products
 
-This task enhances the eCommerce mobile app with network connectivity awareness by introducing a `NetworkInfo` utility. This allows the app to check internet status before performing remote operations, improving reliability and user experience.
+## ✅ Objective
 
-#### 🔌 What Was Implemented:
-
-* **NetworkInfo Abstraction**
-  A new abstract class `NetworkInfo` was created in `network_info.dart`. It defines a single property:
-
-  ```dart
-  abstract class NetworkInfo {
-    Future<bool> get isConnected;
-  }
-  ```
-
-  This ensures a clear contract for checking connectivity regardless of the implementation.
-
-* **NetworkInfoImpl Implementation**
-  The `NetworkInfoImpl` class provides the actual implementation of the `NetworkInfo` interface. It uses the [`internet_connection_checker`](https://pub.dev/packages/internet_connection_checker) package to determine whether the device has an active internet connection:
-
-  ```dart
-  class NetworkInfoImpl implements NetworkInfo {
-    final InternetConnectionChecker connectionChecker;
-
-    NetworkInfoImpl(this.connectionChecker);
-
-    @override
-    Future<bool> get isConnected => connectionChecker.hasConnection;
-  }
-  ```
-
-* **Repository Integration**
-  The `NetworkInfo` instance was injected into the repository via the constructor. The repository now checks for internet connectivity using `networkInfo.isConnected` before making API calls (e.g., fetching products). This ensures that operations requiring network access are only attempted when connectivity is available.
-
-* **Offline Handling**
-  In case of no network connection, the repository gracefully handles the scenario by returning a relevant failure or exception. This prevents the app from crashing and allows the UI to respond appropriately (e.g., showing an error message or offline indicator).
+Implement a local data source layer for caching and managing product data using `SharedPreferences`, adhering to **Clean Architecture** and **Test-Driven Development (TDD)** principles.
 
 ---
+
+## 📦 Features
+
+* Cache product list locally
+* Retrieve cached products
+* Save new product to local storage
+* Update existing product
+* Delete product from cache
+* Proper error handling using `CacheException`
+
+---
+
+## 🛠️ Implementation Summary
+
+### 1. **Interface** – `ProductLocalDataSource`
+
+Located in:
+`lib/features/product/data/datasources/product_local_data_sources.dart`
+
+Defines abstract methods for:
+
+* `getCachedProducts()`
+* `cacheProducts(List<ProductModel>)`
+* `saveProduct(ProductModel)`
+* `updateProduct(ProductModel)`
+* `deleteProduct(int id)`
+
+### 2. **Concrete Class** – `ProductLocalDataSourcesImpl`
+
+Implements all local operations using `SharedPreferences`.
+
+### 3. **Model Used** – `ProductModel`
+
+Serializes and deserializes product data for caching.
+
+---
+
+## 🧪 Tests
+
+Located in:
+`test/features/product/data/datasources/product_local_data_source_test.dart`
+
+### ✅ Test Scenarios Covered:
+
+* ✅ Should cache product list using `SharedPreferences`
+* ✅ Should throw `CacheException` when caching fails
+* ✅ Should return list of `ProductModel` when cached data exists
+* ✅ Should throw `CacheException` when no cached data is found
+* ✅ Should save product to cache
+* ✅ Should update existing product
+* ✅ Should throw `CacheException` when trying to update non-existent product
+* ✅ Should delete product from cache
+* ✅ Should throw `CacheException` if deleting a non-existent product
+
+---
+
+## ⚙️ Dependencies
+
+Make sure the following are added in `pubspec.yaml`:
+
+```yaml
+dependencies:
+  shared_preferences: ^2.5.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.1
+```
+
+---
+
+## 📂 File Structure
+
+```
+lib/
+└── features/
+    └── product/
+        └── data/
+            └── datasources/
+                └── product_local_data_sources.dart
+                └── product_model.dart
+
+test/
+└── features/
+    └── product/
+        └── data/
+            └── datasources/
+                └── product_local_data_source_test.dart
+```
+
+---
+
+## ⚠️ Error Handling
+
+All operations throw `CacheException` from:
+
+```
+lib/core/error/exceptions.dart
+```
+
+If:
+
+* Data is not available
+* Operation (cache/save/update/delete) fails
+
+---
+
+## 📘 References
+
+* Follows [Clean Architecture](https://resocoder.com/2019/09/26/flutter-tdd-clean-architecture-course-8-local-data-source/)
+* Test-first approach using **TDD**
+
