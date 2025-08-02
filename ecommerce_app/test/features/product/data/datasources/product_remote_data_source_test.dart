@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../fixtures/fixture_reader.dart';
+import '../../../../helpers/fixtures/fixture_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 

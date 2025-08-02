@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:ecommerce_app/features/product/data/models/product_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../fixtures/fixture_reader.dart';
+import '../../../../helpers/fixtures/fixture_reader.dart';
 
 
 void main() {
