@@ -5,15 +5,15 @@ class ProductModel extends Product {
     required super.id,
     required super.name,
     required super.price,
-    required super.imageUrl,
+    String? imageUrl,  // nullable here
     required super.description,
-  });
+  }) : super(imageUrl: imageUrl ?? '');
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
       id: json['id'],
       name: json['name'],
-      imageUrl: json['image'],
+      imageUrl: json['image'] as String?, 
       price: (json['price'] as num).toDouble(),
       description: json['description'],
     );

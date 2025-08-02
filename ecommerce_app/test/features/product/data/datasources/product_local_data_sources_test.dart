@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:ecommerce_app/core/error/exceptions.dart';
 import 'package:ecommerce_app/features/product/data/datasources/product_local_data_sources.dart';
@@ -6,7 +7,6 @@ import 'package:ecommerce_app/features/product/data/models/product_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
@@ -19,15 +19,18 @@ void main() {
     dataSource = ProductLocalDataSourcesImpl(sharedPreferences: mockSharedPreferences);
   });
 
-  const tProductModel = ProductModel(
-    id: 1,
-    name: 'Phone',
-    price: 500.0,
-    imageUrl: 'https://img.com/phone.jpg',
-    description: 'Smartphone',
-  );
-  final tProductList = [tProductModel];
-  final tProductListJson = jsonEncode([tProductModel.toJson()]);
+  /// Helper to load fixtures from `test/fixtures/`
+  String fixture(String name) =>
+      File('test/fixtures/$name').readAsStringSync();
+
+  // Use fixtures
+  final tProductJson = fixture('product.json');
+  final tProductModel = ProductModel.fromJson(json.decode(tProductJson));
+
+  final tProductListJson = fixture('product_cached.json');
+  final tProductList = (json.decode(tProductListJson) as List)
+      .map((item) => ProductModel.fromJson(item))
+      .toList();
 
   group('cacheProducts', () {
     test('should call SharedPreferences to cache the data', () async {
@@ -83,13 +86,14 @@ void main() {
 
   group('updateProduct', () {
     test('should update product in local cache', () async {
-      const updatedModel = ProductModel(
-        id: 1,
-        name: 'Phone 2',
-        price: 600.0,
-        imageUrl: 'https://img.com/phone2.jpg',
-        description: 'Updated phone',
+      final updatedModel = ProductModel(
+        id: tProductModel.id,
+        name: 'Updated Name',
+        price: tProductModel.price + 100,
+        imageUrl: tProductModel.imageUrl,
+        description: 'Updated Description',
       );
+
       when(() => mockSharedPreferences.getString(cachedProductsKey))
           .thenReturn(tProductListJson);
       when(() => mockSharedPreferences.setString(any(), any()))
@@ -117,7 +121,7 @@ void main() {
       when(() => mockSharedPreferences.setString(any(), any()))
           .thenAnswer((_) async => true);
 
-      await dataSource.deleteProduct(1);
+      await dataSource.deleteProduct(tProductModel.id);
 
       verify(() => mockSharedPreferences.setString(any(), any())).called(1);
     });
@@ -126,7 +130,7 @@ void main() {
       when(() => mockSharedPreferences.getString(cachedProductsKey))
           .thenReturn(jsonEncode([]));
 
-      final result = dataSource.deleteProduct(1);
+      final result = dataSource.deleteProduct(tProductModel.id);
 
       expect(() => result, throwsA(isA<CacheException>()));
     });

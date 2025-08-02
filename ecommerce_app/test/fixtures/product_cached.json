@@ -1,7 +1,16 @@
-{
-  "id": 1,
-  "name": "Test Product",
-  "price": 49.99,
-  "image": "test.jpg",
-  "description": "Test description"
-}
+[
+  {
+    "id": 1,
+    "name": "Test Product",
+    "price": 49.99,
+    "image": "test.jpg",
+    "description": "Test description"
+  },
+  {
+    "id": 2,
+    "name": "Second Product",
+    "price": 79.99,
+    "image": "image2.jpg",
+    "description": "Second description"
+  }
+]
