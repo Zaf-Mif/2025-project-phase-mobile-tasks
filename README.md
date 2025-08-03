@@ -28,7 +28,7 @@ git clone https://github.com/Zaf-Mif/2025-project-phase-mobile-tasks.git
 
 ## Contact
 
-Zaferan Miftah Akmel
+Zaferan Miftah
 
 ---
 
