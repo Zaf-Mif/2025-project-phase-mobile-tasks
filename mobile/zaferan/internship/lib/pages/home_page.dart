@@ -71,9 +71,10 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final newProduct = await Navigator.pushNamed(context, '/add');
+
           if (newProduct != null && newProduct is Product) {
             setState(() {
-              products.add(newProduct);
+              products.add(newProduct); 
             });
           }
         },

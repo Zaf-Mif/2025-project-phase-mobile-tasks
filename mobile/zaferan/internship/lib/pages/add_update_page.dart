@@ -3,10 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:internship/model/product.dart';
 
 class AddUpdatePage extends StatefulWidget {
-  final Product product;
+  final Product? product;
   // final int? index;
   
-  const AddUpdatePage({super.key, required  this.product});
+  const AddUpdatePage({super.key, this.product});
 
   @override
   State<AddUpdatePage> createState() => _AddUpdatePageState();
