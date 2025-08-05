@@ -12,7 +12,7 @@ class Product extends Equatable{
     required this.name,
     required this.description,
     required this.imageUrl,
-    required this.price,
+    required this.price, 
   });
   
   @override

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product.dart';
 import 'package:ecommerce_app/features/product/domain/repositories/product_repository.dart';
-import 'package:ecommerce_app/features/product/domain/usecases/view_product.dart';
+import 'package:ecommerce_app/features/product/domain/usecases/get_product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -9,12 +9,12 @@ import 'package:mocktail/mocktail.dart';
 class MockProductRepository extends Mock implements ProductRepository {}
 
 void main() {
-  late ViewProductUsecase usecase;
+  late GetProductUsecase usecase;
   late MockProductRepository mockProductRepository;
 
   setUp(() {
     mockProductRepository = MockProductRepository();
-    usecase = ViewProductUsecase(mockProductRepository);
+    usecase = GetProductUsecase(mockProductRepository);
   });
 
   const product = Product(

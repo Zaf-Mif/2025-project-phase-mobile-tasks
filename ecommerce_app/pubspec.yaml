@@ -40,6 +40,7 @@ dependencies:
   # Swap the connectivity package for this
   internet_connection_checker: ^1.0.0+1
   bloc: ^9.0.0
+  meta: ^1.16.0
 
 
 dev_dependencies:
@@ -49,6 +50,7 @@ dev_dependencies:
   mocktail: ^1.0.1
   flutter_lints: ^3.0.1
   test: ^1.25.15
+  bloc_test: 10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -22,7 +22,7 @@ void main() {
   group('ProductModel', () {
     test('fromJson should return valid ProductModel', () {
       // arrange
-      final Map<String, dynamic> jsonMap = json.decode(fixture('product.json'));
+      final Map<String, dynamic> jsonMap = json.decode(fixture('single_product.json'));
       // act
       final result = ProductModel.fromJson(jsonMap);
       // assert
@@ -37,7 +37,7 @@ void main() {
         'id': 1,
         'name': 'Test Product',
         'price': 49.99,
-        'image': 'test.jpg', // Note: key is 'image', not 'imageUrl'
+        'imageUrl': 'test.jpg', 
         'description': 'Test description',
       };
       // assert
