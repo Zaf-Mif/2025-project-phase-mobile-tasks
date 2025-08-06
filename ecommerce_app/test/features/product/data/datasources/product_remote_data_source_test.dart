@@ -15,7 +15,7 @@ void main() {
   late ProductRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
 
-  const baseUrl = 'https://g5-flutter-learning-path-be.onrender.com/api/v1/products';
+  const baseUrl = 'https://g5-flutter-learning-path-be-tvum.onrender.com/api/v1/products';
 
   setUp(() {
     mockHttpClient = MockHttpClient();

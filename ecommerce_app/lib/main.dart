@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+void main() async {
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -43,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-  
+
         title: Text(widget.title),
       ),
       body: Center(
@@ -62,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), 
+      ),
     );
   }
 }
